@@ -1,16 +1,16 @@
 on: [push]
 
-name: Build Docker Image
+name: Lint
 
 jobs:
   deploy:
-    name: Build
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Build
-      id: build-image
-      run: docker build . -t mq
+    - name: Lint
+      id: lint-project
+      run: npm run lint
