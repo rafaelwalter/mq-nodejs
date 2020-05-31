@@ -1,0 +1,24 @@
+version: '3.5'
+services:
+  mq:
+    volumes:
+      - ./:/app:delegated
+      - /app/node_modules
+    ports:
+      - ${DEBUG_PORT:-30001}:${DEBUG_PORT:-30001}
+    environment: 
+      NODE_ENV: ${NODE_ENV:-development}
+      DEBUG_PORT: ${DEBUG_PORT:-30001}
+    command: bash -c "npm i --only dev && npx nodemon --inspect=0.0.0.0:${DEBUG_PORT:-30001} dist --watch dist"
+  mq-watcher:
+    image: mq
+    container_name: mq-watcher
+    volumes:
+      - ./:/app:delegated
+      - /app/node_modules
+    depends_on: 
+      - mq
+    command: bash -c "npm i --only dev && npm run watch"
+networks: 
+  default:
+    name: test-env
