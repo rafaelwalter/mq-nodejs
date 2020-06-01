@@ -1,10 +1,10 @@
 on: [push]
 
-name: Lint
+name: Lint & Build
 
 jobs:
-  deploy:
-    name: Lint
+  build:
+    name: mq-nodejs
     runs-on: ubuntu-latest
 
     steps:
