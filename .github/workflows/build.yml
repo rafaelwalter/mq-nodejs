@@ -18,3 +18,8 @@ jobs:
     - name: Lint
       id: lint-project
       run: npm run lint
+
+    - name: Build
+      id: build-project
+      run: npm run build
+    
